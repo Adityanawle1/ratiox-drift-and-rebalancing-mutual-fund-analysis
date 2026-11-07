@@ -1,0 +1,373 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .font-inter {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-optical-sizing: auto;
+  }
+  
+  .font-display {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-optical-sizing: auto;
+  }
+
+  .font-dm {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-feature-settings: 'zero', 'ss01';
+  }
+
+  /* Premium text rendering */
+  .text-premium {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
+  }
+
+  /* Sleek heading styles - Light and elegant */
+  .heading-premium {
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Refined subheading styles */
+  .subheading-premium {
+    font-weight: 200;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ultra-light accent text */
+  .text-sleek {
+    font-weight: 100;
+    letter-spacing: 0.02em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes text-shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes float-up {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-in {
+    0% {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.4;
+      filter: blur(0px) brightness(1);
+    }
+    50% {
+      opacity: 0.7;
+      filter: blur(1px) brightness(1.1);
+    }
+  }
+
+  @keyframes float-animation {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes shimmer-premium {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes subtle-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(232, 147, 16, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(232, 147, 16, 0.2);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 200;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 30 20% 93%;
+
+    --card: 0 0% 6.7%;
+    --card-foreground: 30 20% 93%;
+
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 30 20% 93%;
+
+    --primary: 37 90% 55%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 30 20% 93%;
+
+    --muted: 0 0% 13%;
+    --muted-foreground: 30 10% 60%;
+
+    --accent: 37 90% 55%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 20% 93%;
+
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --surface-border: 0 0% 12%;
+    --ring: 37 90% 55%;
+
+    --radius: 0.375rem;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 30 20% 93%;
+    --sidebar-primary: 37 90% 55%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 13%;
+    --sidebar-accent-foreground: 30 20% 93%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 37 90% 55%;
+
+    /* Semantic tokens */
+    --surface: 0 0% 6.7%;
+    --amber: 37 90% 55%;
+    --drift-green: 142 60% 45%;
+    --drift-red: 0 72% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 64px; /* Account for the fixed nav height */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    @apply tracking-tight;
+  }
+
+  .font-body {
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Premium animations */
+  .glow-text {
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+
+  .float {
+    animation: float-animation 4s ease-in-out infinite;
+  }
+
+  .subtle-glow {
+    animation: subtle-glow 3s ease-in-out infinite;
+  }
+
+  .fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+
+  /* Premium gradient text */
+  .gradient-text-amber {
+    background: linear-gradient(135deg, #e89310 0%, #d4a574 50%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Premium shadow effects */
+  .shadow-premium {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .shadow-premium-sm {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .shadow-glow-amber {
+    box-shadow: 0 0 30px rgba(232, 147, 16, 0.15);
+  }
+
+  /* Backdrop effects */
+  .backdrop-premium {
+    backdrop-filter: blur(12px) brightness(1.05);
+  }
+
+  /* Glass morphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Smooth transitions */
+  .transition-premium {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Text effects */
+  .text-gradient {
+    background: linear-gradient(135deg, currentColor 0%, currentColor 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Border glows */
+  .border-glow-amber {
+    border-color: rgba(232, 147, 16, 0.3);
+    transition: all 300ms ease;
+  }
+
+  .border-glow-amber:hover {
+    border-color: rgba(232, 147, 16, 0.6);
+    box-shadow: 0 0 20px rgba(232, 147, 16, 0.15);
+  }
+
+  /* Micro-interaction: card hover glow */
+  .card-hover-glow {
+    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover-glow:hover {
+    box-shadow: 0 0 40px rgba(232, 147, 16, 0.08);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Micro-interaction: click feedback */
+  .click-feedback {
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .click-feedback:active {
+    transform: scale(0.97);
+  }
+
+  /* Slow spin for loader icons */
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Staggered fade-in for lists */
+  .stagger-fade-in > * {
+    opacity: 0;
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+
+  .stagger-fade-in > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-fade-in > *:nth-child(2) { animation-delay: 80ms; }
+  .stagger-fade-in > *:nth-child(3) { animation-delay: 160ms; }
+  .stagger-fade-in > *:nth-child(4) { animation-delay: 240ms; }
+  .stagger-fade-in > *:nth-child(5) { animation-delay: 320ms; }
+  .stagger-fade-in > *:nth-child(6) { animation-delay: 400ms; }
+}
