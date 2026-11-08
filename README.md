@@ -1,8 +1,24 @@
-# RatioX 
+# RatioX — Autonomous Mutual Fund Fee Audit & Portfolio Rebalancing Engine
 
-> **Live Platform:** [ratiox.in](https://ratiox.in)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database%20%26%20Auth-3ECF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com/)
+[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-amber?style=flat-square)](#-license)
+
+> **Live Production Platform:** [ratiox.in](https://ratiox.in)
 
 An asset allocation monitor and portfolio rebalancing engine designed for self-directed investors in India. RatioX continuously tracks **portfolio drift**—the silent asset class deviation caused by market moves—and calculates tax-optimized rebalancing protocols to defend your capital against hidden fees and unnecessary risk.
+
+---
+
+## 🎯 Hackathon Highlights & Core Innovations
+
+1. **Autonomous TER Arbitrage Engine**: Computes exact distributor commission leakages between Regular and Direct mutual fund plans over 10-30 year horizons, projecting compound wealth restoration.
+2. **Tax-Harvesting & Capital Gains Firewall**: Classifies rebalance orders under Indian tax frameworks (LTCG at 12.5% vs STCG at 20%) and prioritizes cash inflow allocations over selling.
+3. **High-Performance Glassmorphic HUD**: Dark brutalist terminal aesthetic built with modular Radix UI primitives, Lenis smooth scrolling, Three.js spatial globe visualization, and dynamic hover matrixes.
+4. **Optimized Route-Level Code Splitting**: Async-partitioned bundle structure dividing heavy Three.js, Recharts, and Supabase vendor modules for fast initial loads and sub-second page transitions.
 
 ---
 
@@ -132,13 +148,15 @@ VITE_NEWSDATA_API_KEY=your-newsdata-key
 
 ## 👥 Authors & Contributions
 
-* **Aditya Nawle** — Core Architecture, Mathematical Engine & Audit Log Logic
-* **Anantha Vishwa Priya** — Frontend Architecture, Broker Integrations & System Infrastructure
+* **Anantha** — Frontend Architecture, Broker Integrations & System Infrastructure
+* **Rashmita** — Quantitative Analytics & Portfolio Drift Optimization
+* **Parth** — Protocol Engineering & Security Architecture
+* **Aditya** — Core Architecture, Mathematical Engine & Audit Log Logic
 
 ---
 
 ## 📄 License
 
-Copyright (c) 2025-2026 Aditya Nawle and Anantha Vishwa Priya. All rights reserved.
+Copyright (c) 2025-2026 Anantha, Rashmita, Parth, and Aditya. All rights reserved.
 
 This repository is public for collaborative review and code auditing. Direct commercial repackaging, redistribution, or production mirroring of this codebase without the authors' prior consent is prohibited.
