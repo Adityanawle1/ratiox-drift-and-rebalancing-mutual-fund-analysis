@@ -17,10 +17,12 @@ const FounderCard = ({ number, name, surname, description, svgContent, linkUrl }
   };
 
   const Content = () => (
-    <h2 className="font-display text-5xl md:text-8xl tracking-tighter uppercase inline-flex items-center gap-3 text-white group-hover:text-black transition-all duration-500">
+    <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter uppercase inline-flex items-center gap-3 text-white group-hover:text-black transition-all duration-500">
       {name}
-      {svgContent.icon}
-      <span className="font-mono text-[10px] md:text-sm text-[#555] tracking-[0.3em] align-top transition-colors group-hover:text-[#333]">{surname}</span>
+      {svgContent?.icon}
+      {surname && (
+        <span className="font-mono text-[10px] md:text-sm text-[#555] tracking-[0.3em] align-top transition-colors group-hover:text-[#333]">{surname}</span>
+      )}
     </h2>
   );
 
@@ -30,7 +32,7 @@ const FounderCard = ({ number, name, surname, description, svgContent, linkUrl }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
-      className="border-b md:border-r border-[#222] p-6 sm:p-8 md:p-12 lg:p-16 hover:bg-white hover:text-black transition-colors duration-700 group flex flex-col justify-between min-h-[400px] relative overflow-hidden"
+      className="border-b border-r border-[#222] p-6 sm:p-8 md:p-12 lg:p-14 hover:bg-white hover:text-black transition-colors duration-700 group flex flex-col justify-between min-h-[400px] relative overflow-hidden"
     >
       <div 
         className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-all duration-700 pointer-events-none"
@@ -156,24 +158,11 @@ const AboutUs: React.FC = () => {
             <span className="font-mono text-[10px] uppercase tracking-widest text-[#666]">02 // Genesis</span>
           </div>
 
-          <div className="grid md:grid-cols-3 border-t border-l border-[#222]">
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[#222]">
             
             <FounderCard 
               number="01"
-              name="Aditya"
-              surname="NAWLE ↗"
-              description="If the mutual fund industry thrives on opacity, we exist to dismantle it. True wealth creation demands absolute, uncompromising clarity."
-              linkUrl="https://portfolio-eight-umber-fian7abm8o.vercel.app/"
-              svgContent={{
-                icon: <svg width="24" height="24" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="text-[#666] group-hover:text-black transition-colors"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" /><circle cx="50" cy="50" r="10" /></svg>,
-                watermark: <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" /><circle cx="50" cy="50" r="10" /></svg>
-              }}
-            />
-
-            <FounderCard 
-              number="02"
               name="Anantha"
-              surname="VISHWA PRIYA"
               description="Complexity is a tax on the uninformed. We built this protocol because if mutual funds won't give you transparency, we will build it ourselves."
               svgContent={{
                 icon: <svg width="28" height="28" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="text-[#666] group-hover:text-black transition-colors"><circle cx="50" cy="50" r="25"/><ellipse cx="50" cy="50" rx="45" ry="12" transform="rotate(-20 50 50)"/></svg>,
@@ -182,13 +171,33 @@ const AboutUs: React.FC = () => {
             />
 
             <FounderCard 
+              number="02"
+              name="Rashmita"
+              description="Financial autonomy begins when hidden costs are laid bare. Algorithmic precision is the only hedge against systematic value extraction."
+              svgContent={{
+                icon: <svg width="26" height="26" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="text-[#666] group-hover:text-black transition-colors"><polygon points="50,10 90,50 50,90 10,50"/><circle cx="50" cy="50" r="14"/></svg>,
+                watermark: <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="50,10 90,50 50,90 10,50"/><circle cx="50" cy="50" r="14"/></svg>
+              }}
+            />
+
+            <FounderCard 
               number="03"
-              name="Sachin"
-              surname="JADHAV"
-              description="Complexity is a tax on the uninformed. We built this protocol because if mutual funds won't give you transparency, we will build it ourselves."
+              name="Parth"
+              description="Every basis point lost to inefficiency compounds into lost freedom. We engineer systems that ensure your capital works strictly for you."
               svgContent={{
                 icon: <svg width="24" height="24" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="text-[#666] group-hover:text-black transition-colors"><path d="M50 10 L90 30 V70 L50 90 L10 70 V30 Z M50 50 L10 30 M50 50 L90 30 M50 50 V90" /></svg>,
                 watermark: <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2"><path d="M50 10 L90 30 V70 L50 90 L10 70 V30 Z M50 50 L10 30 M50 50 L90 30 M50 50 V90" /></svg>
+              }}
+            />
+
+            <FounderCard 
+              number="04"
+              name="Aditya"
+              description="If the mutual fund industry thrives on opacity, we exist to dismantle it. True wealth creation demands absolute, uncompromising clarity."
+              linkUrl="https://portfolio-eight-umber-fian7abm8o.vercel.app/"
+              svgContent={{
+                icon: <svg width="24" height="24" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="text-[#666] group-hover:text-black transition-colors"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" /><circle cx="50" cy="50" r="10" /></svg>,
+                watermark: <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" /><circle cx="50" cy="50" r="10" /></svg>
               }}
             />
 
@@ -237,10 +246,10 @@ const AboutUs: React.FC = () => {
             </div>
 
             <div className="z-10 shrink-0 font-mono text-[10px] md:text-xs text-[#555] text-right flex flex-col gap-3 uppercase tracking-[0.2em] w-full md:w-auto border-t md:border-t-0 md:border-l border-[#222] pt-6 md:pt-0 md:pl-12 mt-6 md:mt-0">
-              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300 delay-[0ms]"><span>Ping</span> <span>12ms</span></p>
-              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300 delay-[75ms]"><span>Drift Tolerance</span> <span>0.00%</span></p>
-              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300 delay-[150ms]"><span>Commission</span> <span>Zero</span></p>
-              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300 delay-[225ms]"><span>Clarity</span> <span>Absolute</span></p>
+              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300" style={{ transitionDelay: '0ms' }}><span>Ping</span> <span>12ms</span></p>
+              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300" style={{ transitionDelay: '75ms' }}><span>Drift Tolerance</span> <span>0.00%</span></p>
+              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300" style={{ transitionDelay: '150ms' }}><span>Commission</span> <span>Zero</span></p>
+              <p className="flex justify-between gap-12 group-hover:text-white transition-colors duration-300" style={{ transitionDelay: '225ms' }}><span>Clarity</span> <span>Absolute</span></p>
             </div>
           </div>
         </section>
