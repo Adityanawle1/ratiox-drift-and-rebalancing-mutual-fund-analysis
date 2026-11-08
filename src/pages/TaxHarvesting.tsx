@@ -126,20 +126,20 @@ const TaxHarvesting = () => {
       {/* Main Content Area */}
       <div className="pt-24 max-w-4xl mx-auto px-6 relative">
         <div className="mb-8">
-          <h1 className="font-display text-3xl font-semibold mb-2 flex items-center gap-3">
+          <h1 className="text-3xl font-semibold tracking-tight mb-2 flex items-center gap-3">
             Tax Scenario Analysis
             {!isPro && <Lock className="w-5 h-5 text-amber/80" />}
           </h1>
-          <p className="text-muted-foreground font-body text-sm max-w-2xl">
+          <p className="text-[#888] text-sm max-w-2xl">
             Explore hypothetical tax scenarios based on your current holdings. For educational purposes only — not tax or investment advice.
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center gap-4 border-b border-surface-border mb-8">
+        <div className="flex items-center gap-1 border-b border-[#1a1a1a] mb-8">
           <button
             onClick={() => setActiveTab("LOSS_HARVESTING")}
-            className={`px-4 py-3 font-mono text-xs uppercase tracking-wider transition-colors relative ${activeTab === "LOSS_HARVESTING" ? "text-amber" : "text-muted-foreground hover:text-foreground"}`}
+            className={`px-4 py-3 text-[13px] font-medium transition-colors relative ${activeTab === "LOSS_HARVESTING" ? "text-amber" : "text-[#888] hover:text-white"}`}
           >
             Loss Scenario
             {activeTab === "LOSS_HARVESTING" && (
@@ -148,7 +148,7 @@ const TaxHarvesting = () => {
           </button>
           <button
             onClick={() => setActiveTab("LTCG_OPTIMISER")}
-            className={`px-4 py-3 font-mono text-xs uppercase tracking-wider transition-colors relative ${activeTab === "LTCG_OPTIMISER" ? "text-amber" : "text-muted-foreground hover:text-foreground"}`}
+            className={`px-4 py-3 text-[13px] font-medium transition-colors relative ${activeTab === "LTCG_OPTIMISER" ? "text-amber" : "text-[#888] hover:text-white"}`}
           >
             LTCG Scenario
             {activeTab === "LTCG_OPTIMISER" && (
@@ -183,34 +183,34 @@ const TaxHarvesting = () => {
                     </div>
 
                     {/* Summary Card */}
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-6 bg-card border border-surface-border rounded-[2px]">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-6 bg-[#0c0c0c] border border-[#1a1a1a] rounded-lg">
                       <div>
-                        <p className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider mb-1">Unrealized gains</p>
-                        <p className="font-mono text-lg text-foreground">₹{totalUnrealizedGains.toLocaleString("en-IN", { maximumFractionDigits: 0 })}</p>
+                        <p className="text-[11px] text-[#888] font-medium uppercase tracking-wide mb-1">Unrealized gains</p>
+                        <p className="font-mono text-lg text-white tabular">₹{totalUnrealizedGains.toLocaleString("en-IN", { maximumFractionDigits: 0 })}</p>
                       </div>
                       <div>
-                        <p className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider mb-1">Unrealized losses</p>
-                        <p className="font-mono text-lg text-drift-red">
+                        <p className="text-[11px] text-[#888] font-medium uppercase tracking-wide mb-1">Unrealized losses</p>
+                        <p className="font-mono text-lg text-rose-400 tabular">
                           {totalHarvestableLosses < 0 && "-"}₹{Math.abs(totalHarvestableLosses).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                         </p>
                       </div>
                       <div>
-                        <p className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider mb-1">Net if offset</p>
-                        <p className="font-mono text-lg text-foreground">
+                        <p className="text-[11px] text-[#888] font-medium uppercase tracking-wide mb-1">Net if offset</p>
+                        <p className="font-mono text-lg text-white tabular">
                           ₹{Math.max(0, totalUnrealizedGains + totalHarvestableLosses).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                         </p>
                       </div>
-                      <div className="pl-4 border-l border-surface-border">
-                        <p className="text-[10px] text-amber uppercase font-mono tracking-wider mb-1 font-semibold">Hypothetical Impact</p>
-                        <p className="font-mono text-2xl text-amber font-bold">
+                      <div className="pl-4 border-l border-[#1a1a1a]">
+                        <p className="text-[11px] text-amber font-medium uppercase tracking-wide mb-1">Hypothetical impact</p>
+                        <p className="font-mono text-2xl text-amber font-bold tabular">
                           ₹{(Math.abs(totalHarvestableLosses) * 0.20).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                         </p>
-                        <p className="text-[9px] text-muted-foreground/50 font-body mt-1">Estimated · not guaranteed</p>
+                        <p className="text-[10px] text-[#666] mt-1">Estimated · not guaranteed</p>
                       </div>
                     </div>
 
                     {/* Scenarios list */}
-                    <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-8 mb-4">Loss Positions — Scenario Analysis</h3>
+                    <h3 className="text-[13px] font-medium text-[#888] mt-8 mb-4">Loss positions — scenario analysis</h3>
                     {lossSuggestions.length === 0 ? (
                       <div className="p-8 text-center border border-dashed border-surface-border bg-surface/20">
                         <p className="font-mono text-sm text-foreground mb-2">No loss positions found</p>
@@ -222,10 +222,10 @@ const TaxHarvesting = () => {
                           <div key={h.id} className="p-5 border border-surface-border bg-card rounded-[2px] hover:border-surface-border/80 transition-colors">
                             <div className="flex justify-between items-start mb-4">
                               <div>
-                                <span className="text-[10px] font-mono tracking-widest uppercase bg-amber/10 text-amber px-2 py-1 rounded-[2px] border border-amber/20 mb-3 inline-block">
-                                  Hypothetical Scenario
+                                <span className="text-[10px] font-medium bg-amber/10 text-amber px-2 py-0.5 rounded mb-3 inline-block">
+                                  Hypothetical scenario
                                 </span>
-                                <h4 className="font-mono text-lg font-medium text-foreground">{h.symbol}</h4>
+                                <h4 className="text-lg font-medium text-white">{h.symbol}</h4>
                               </div>
                               <div className="text-right">
                                 <p className="text-xs text-muted-foreground font-mono mb-1 tracking-wider">Unrealized Loss</p>
@@ -290,7 +290,7 @@ const TaxHarvesting = () => {
                     )}
 
                     {/* Scenarios list */}
-                    <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-8 mb-4">LTCG Exemption — Scenario Analysis</h3>
+                    <h3 className="text-[13px] font-medium text-[#888] mt-8 mb-4">LTCG exemption — scenario analysis</h3>
                     {ltcgSuggestions.length === 0 ? (
                       <div className="p-8 text-center border border-dashed border-surface-border bg-surface/20">
                         <p className="font-mono text-sm text-foreground mb-2">No LTCG scenarios found</p>
@@ -302,10 +302,10 @@ const TaxHarvesting = () => {
                           <div key={h.id} className="p-5 border border-surface-border bg-card rounded-[2px] hover:border-surface-border/80 transition-colors">
                             <div className="flex justify-between items-start mb-4">
                               <div>
-                                <span className="text-[10px] font-mono tracking-widest uppercase bg-amber/10 text-amber px-2 py-1 rounded-[2px] border border-amber/20 mb-3 inline-block">
-                                  Hypothetical Scenario
+                                <span className="text-[10px] font-medium bg-amber/10 text-amber px-2 py-0.5 rounded mb-3 inline-block">
+                                  Hypothetical scenario
                                 </span>
-                                <h4 className="font-mono text-lg font-medium text-foreground">{h.symbol}</h4>
+                                <h4 className="text-lg font-medium text-white">{h.symbol}</h4>
                               </div>
                               <div className="text-right">
                                 <p className="text-xs text-muted-foreground font-mono mb-1 tracking-wider">Holding Period</p>
@@ -385,14 +385,14 @@ const TaxHarvesting = () => {
                   <Lock className="w-5 h-5 text-amber" />
                 </div>
 
-                <p className="text-[10px] uppercase font-mono tracking-widest text-amber mb-2 font-semibold">Pro Feature</p>
-                <h2 className="text-2xl font-display font-semibold text-foreground mb-4">Tax Scenario Analysis</h2>
-                <p className="text-sm font-body text-muted-foreground mb-8">
+                <p className="text-[11px] text-amber font-medium mb-2">Pro Feature</p>
+                <h2 className="text-2xl font-semibold text-white mb-4">Tax Scenario Analysis</h2>
+                <p className="text-sm text-[#888] mb-8">
                   Explore hypothetical tax scenarios based on your portfolio data — for educational purposes only.
                 </p>
 
                 <div className="text-left space-y-3 mb-8">
-                  <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-4">What you get:</p>
+                  <p className="text-[11px] text-[#888] font-medium mb-4">What you get:</p>
                   {[
                     "Loss position scenario analysis",
                     "LTCG exemption scenario modeling",
@@ -409,13 +409,13 @@ const TaxHarvesting = () => {
                 <div className="space-y-3">
                   <button
                     onClick={handleUpgradeIntent}
-                    className="w-full bg-amber text-background font-mono text-xs uppercase tracking-widest font-semibold py-3.5 rounded-[2px] hover:brightness-110 transition-all shadow-glow-amber flex items-center justify-center gap-2"
+                    className="w-full bg-amber text-black text-[13px] font-medium py-3.5 rounded-md hover:brightness-110 transition-all flex items-center justify-center gap-2"
                   >
                     Upgrade to Pro — ₹199/month
                   </button>
                   <Link
                     to="/dashboard"
-                    className="block w-full text-center py-2 text-xs font-mono text-muted-foreground hover:text-foreground uppercase tracking-widest transition-colors"
+                    className="block w-full text-center py-2 text-[13px] text-[#888] hover:text-white transition-colors"
                   >
                     Maybe later
                   </Link>
