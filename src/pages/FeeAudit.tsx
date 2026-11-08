@@ -115,53 +115,41 @@ const FeeAudit = () => {
 
   return (
     <div className="min-h-screen bg-[#060606] text-[#e0e0e0] pb-20">
-      {/* Universal Institutional Navigation */}
       <DashboardNav activeTab="fee-audit" />
 
       <div className="pt-28 max-w-6xl mx-auto px-6 relative">
-        <div className="absolute top-20 right-0 w-96 h-96 bg-amber/5 rounded-full blur-[100px] pointer-events-none" />
-        
-        {/* Top Header & Actions */}
-        <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative z-10 border-b border-[#1f1f1f] pb-8">
+        {/* Header */}
+        <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative z-10 border-b border-[#1a1a1a] pb-8">
           <div>
-            <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber bg-amber/10 border border-amber/20 px-2 py-0.5 rounded">
-                TER Arbitrage Engine
-              </span>
-              <span className="text-[#555] text-xs">•</span>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[#777]">
-                AMFI & SEBI Compliant
-              </span>
-            </div>
-            <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-2">
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-2">
               Fee Audit
             </h1>
-            <p className="text-[#888] font-body text-sm max-w-2xl leading-relaxed">
-              Deconstruct every basis point eroding your wealth. Compares direct vs regular expense ratios, distributor commissions, and 10-year compounding drag.
+            <p className="text-[#888] text-sm max-w-2xl leading-relaxed">
+              See every rupee you are paying — visible and hidden. Across your entire portfolio.
             </p>
           </div>
           
           <div className="flex items-center gap-3 shrink-0">
             <button 
               onClick={() => setAddModalOpen(true)}
-              className="text-xs uppercase tracking-wider bg-amber text-black font-mono font-bold px-5 py-2.5 rounded-[4px] hover:brightness-110 transition-all shadow-[0_0_16px_rgba(245,158,11,0.3)] hover:-translate-y-0.5"
+              className="text-[13px] font-medium bg-amber text-black px-5 py-2.5 rounded-md hover:brightness-110 transition-all"
             >
-              + Add Mutual Fund
+              + Add mutual fund
             </button>
           </div>
         </div>
 
-        {/* Enhanced Tab Bar */}
-        <div className="flex items-center gap-2 border-b border-[#1e1e1e] mb-8 overflow-x-auto pb-px">
+        {/* Tab Bar */}
+        <div className="flex items-center gap-1 border-b border-[#1a1a1a] mb-8 overflow-x-auto pb-px">
           {TABS.map(tab => (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-3 font-mono text-xs uppercase tracking-wider transition-all relative whitespace-nowrap rounded-t-[4px] ${
+              className={`px-4 py-3 text-[13px] font-medium transition-all relative whitespace-nowrap ${
                 activeTab === tab.key 
-                  ? "bg-[#141414] text-amber border-t border-x border-[#2a2a2a] font-semibold" 
-                  : "text-[#777] hover:text-white hover:bg-white/[0.02]"
+                  ? "text-amber" 
+                  : "text-[#777] hover:text-white"
               }`}>
               {tab.label}
-              {activeTab === tab.key && <div className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-amber shadow-[0_0_8px_rgba(245,158,11,0.8)]" />}
+              {activeTab === tab.key && <div className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-amber" />}
             </button>
           ))}
         </div>
@@ -183,9 +171,9 @@ const FeeAudit = () => {
               </>
             )}
 
-            {/* Per-tab disclaimer */}
-            <div className="mt-12 text-[10px] font-body text-muted-foreground/60 leading-relaxed max-w-3xl p-4 border border-surface-border/30 bg-surface/10 rounded-[2px]">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/80 block mb-2">Disclaimer</span>
+            {/* Disclaimer */}
+            <div className="mt-12 text-[11px] text-[#666] leading-relaxed max-w-3xl p-4 border border-[#1a1a1a] rounded-md">
+              <span className="text-[10px] font-medium text-[#888] block mb-1.5">Disclaimer</span>
               Ratio x uses publicly available fee structures and your entered data to estimate costs. Actual charges may vary.
               Stamp duty, STT, and exit load rules may change. This is not financial advice. Always verify with your fund house or AMFI.
             </div>
