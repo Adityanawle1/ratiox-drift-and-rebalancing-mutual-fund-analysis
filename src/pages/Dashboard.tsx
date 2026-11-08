@@ -216,8 +216,6 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="pt-24 pb-16 max-w-6xl mx-auto px-6 relative">
-        <div className="fixed top-24 right-10 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[140px] pointer-events-none -z-10" />
-        <div className="fixed bottom-10 left-10 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none -z-10" />
         {loading ? (
           <div className="flex flex-col items-center justify-center h-64 gap-4">
             <div className="w-8 h-8 border-2 border-amber border-t-transparent rounded-full animate-spin" />
@@ -235,104 +233,85 @@ const Dashboard = () => {
           </div>
         ) : (
           <>
-            {/* Institutional Portfolio Cockpit Card */}
-            <div className="mb-10 p-6 md:p-8 rounded-[12px] bg-[#0c0c0c] border border-[#1f1f1f] shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-amber/5 rounded-full blur-[100px] pointer-events-none" />
+            {/* Portfolio Overview Card */}
+            <div className="mb-10 p-6 md:p-8 rounded-xl bg-[#0c0c0c] border border-[#1a1a1a] relative overflow-hidden">
               
-              {/* Cockpit Top Bar */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1c1c1c] mb-6 relative z-10">
-                <div className="flex items-center gap-3">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h1 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-white">
-                        {portfolio?.name || "My Portfolio"}
-                      </h1>
-                      <span className="font-mono text-[9px] uppercase tracking-wider text-amber bg-amber/10 border border-amber/20 px-2 py-0.5 rounded">
-                        Active Ledger
-                      </span>
-                    </div>
-                    <p className="text-[11px] font-mono text-[#666] mt-0.5">
-                      Account ID: {user?.id.slice(0, 8)}... • SEBI Regulatory Standard Format
-                    </p>
-                  </div>
+              {/* Top Bar */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1a1a1a] mb-6 relative z-10">
+                <div>
+                  <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">
+                    {portfolio?.name || "My Portfolio"}
+                  </h1>
                 </div>
 
-                {/* Top Action Buttons */}
+                {/* Action Buttons */}
                 <div className="flex flex-wrap items-center gap-2.5">
                   <button
                     onClick={() => setAddModalOpen(true)}
-                    className="text-xs uppercase tracking-wider font-mono bg-amber text-black font-bold px-4 py-2 rounded-[4px] hover:brightness-110 transition-all shadow-[0_0_12px_rgba(245,158,11,0.3)] hover:-translate-y-0.5"
+                    className="text-[13px] font-medium bg-amber text-black px-4 py-2 rounded-md hover:brightness-110 transition-all"
                   >
-                    + Add Position
+                    + Add position
                   </button>
                   <button
                     onClick={() => setImportCSVModalOpen(true)}
-                    className="text-xs uppercase tracking-wider font-mono border border-[#2a2a2a] bg-[#141414] text-white hover:bg-[#1e1e1e] px-4 py-2 rounded-[4px] transition-all hover:-translate-y-0.5"
+                    className="text-[13px] font-medium border border-[#2a2a2a] bg-[#141414] text-white hover:bg-[#1e1e1e] px-4 py-2 rounded-md transition-all"
                   >
                     Import CAS
                   </button>
                   <button
                     onClick={() => setShareModalOpen(true)}
-                    className="text-xs uppercase tracking-wider font-mono border border-[#2a2a2a] bg-[#141414] text-[#aaa] hover:text-white hover:bg-[#1e1e1e] px-3 py-2 rounded-[4px] transition-all flex items-center gap-1.5"
+                    className="text-[13px] font-medium border border-[#2a2a2a] bg-[#141414] text-[#aaa] hover:text-white hover:bg-[#1e1e1e] px-3 py-2 rounded-md transition-all flex items-center gap-1.5"
                     title="Export Tear Sheet"
                   >
                     <Share2 className="w-3.5 h-3.5 text-amber" />
-                    <span>Tear Sheet</span>
+                    <span>Tear sheet</span>
                   </button>
                 </div>
               </div>
 
               {/* Metrics & Health Score Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center relative z-10">
                 {/* 3 Metrics Cards */}
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {/* Total Value */}
-                  <div className="bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] p-5 rounded-[8px] transition-all group">
-                    <p className="text-[10px] text-[#777] font-mono uppercase tracking-[0.2em] mb-2">
-                      Total Market Value
+                  <div className="bg-[#0f0f0f] border border-[#1a1a1a] hover:border-[#2a2a2a] p-5 rounded-lg transition-all group">
+                    <p className="text-[11px] text-[#777] font-medium uppercase tracking-wide mb-2">
+                      Total value
                     </p>
-                    <p className="font-mono text-2xl md:text-3xl text-white font-medium tracking-tight group-hover:text-amber transition-colors">
+                    <p className="font-mono text-2xl md:text-3xl text-white font-medium tracking-tight tabular group-hover:text-amber transition-colors">
                       ₹{totalValue.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
-                    </p>
-                    <p className="text-[10px] font-mono text-[#555] mt-2 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      Live NAV Real-Time Sync
                     </p>
                   </div>
 
                   {/* Invested */}
-                  <div className="bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] p-5 rounded-[8px] transition-all">
-                    <p className="text-[10px] text-[#777] font-mono uppercase tracking-[0.2em] mb-2">
-                      Capital Deployed
+                  <div className="bg-[#0f0f0f] border border-[#1a1a1a] hover:border-[#2a2a2a] p-5 rounded-lg transition-all">
+                    <p className="text-[11px] text-[#777] font-medium uppercase tracking-wide mb-2">
+                      Total invested
                     </p>
-                    <p className="font-mono text-2xl md:text-3xl text-white font-medium tracking-tight">
+                    <p className="font-mono text-2xl md:text-3xl text-white font-medium tracking-tight tabular">
                       ₹{totalInvested.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
-                    </p>
-                    <p className="text-[10px] font-mono text-[#555] mt-2">
-                      Book Value Benchmark
                     </p>
                   </div>
 
                   {/* P&L */}
-                  <div className="bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] p-5 rounded-[8px] transition-all">
-                    <p className="text-[10px] text-[#777] font-mono uppercase tracking-[0.2em] mb-2">
-                      Overall Return
+                  <div className="bg-[#0f0f0f] border border-[#1a1a1a] hover:border-[#2a2a2a] p-5 rounded-lg transition-all">
+                    <p className="text-[11px] text-[#777] font-medium uppercase tracking-wide mb-2">
+                      Overall P&L
                     </p>
-                    <p className={`font-mono text-2xl md:text-3xl font-medium tracking-tight ${overallPnl >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    <p className={`font-mono text-2xl md:text-3xl font-medium tracking-tight tabular ${overallPnl >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                       {overallPnl >= 0 ? "+" : "-"}₹{Math.abs(overallPnl).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
                     </p>
-                    <p className={`text-[11px] font-mono mt-1 font-semibold ${overallPnl >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                      {overallPnlPct >= 0 ? "+" : ""}{overallPnlPct.toFixed(2)}% Absolute
+                    <p className={`text-[12px] font-mono mt-1.5 ${overallPnl >= 0 ? "text-emerald-400/80" : "text-rose-400/80"}`}>
+                      {overallPnlPct >= 0 ? "+" : ""}{overallPnlPct.toFixed(2)}%
                     </p>
                   </div>
                 </div>
 
                 {/* Health Score Gauge Tile */}
-                <div className="lg:col-span-4 bg-gradient-to-br from-[#121212] to-[#0a0a0a] border border-[#222] p-5 rounded-[8px] flex flex-col items-center text-center relative overflow-hidden">
+                <div className="lg:col-span-4 bg-[#0f0f0f] border border-[#1a1a1a] p-5 rounded-lg flex flex-col items-center text-center">
                   <div className="w-full flex items-center justify-between mb-2">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#777]">
-                      Allocation Health
+                    <span className="text-[11px] text-[#777] font-medium uppercase tracking-wide">
+                      Health score
                     </span>
                     <button 
                       onClick={async () => {
@@ -342,7 +321,7 @@ const Dashboard = () => {
                         toast.success("Prices updated successfully", { id: "refresh-toast" });
                       }}
                       className="text-[#666] hover:text-amber transition-colors p-1"
-                      title="Force refresh live market rates"
+                      title="Refresh market data"
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
@@ -352,7 +331,7 @@ const Dashboard = () => {
                   </div>
 
                   <div className="relative my-2 flex items-center justify-center">
-                    <svg width="140" height="76" viewBox="0 0 120 68" className="drop-shadow-md">
+                    <svg width="140" height="76" viewBox="0 0 120 68">
                       <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="#1f1f1f" strokeWidth="7" strokeLinecap="round" />
                       <path 
                         d="M10 60 A50 50 0 0 1 110 60" 
@@ -366,27 +345,21 @@ const Dashboard = () => {
                       />
                     </svg>
                     <div className="absolute bottom-0 text-center">
-                      <span className="font-display text-3xl font-bold text-white tracking-tight">
+                      <span className="text-3xl font-bold text-white tracking-tight tabular">
                         {healthScore.toFixed(0)}
                       </span>
-                      <span className="font-mono text-xs text-[#666] ml-0.5">/100</span>
+                      <span className="text-xs text-[#666] ml-0.5">/100</span>
                     </div>
                   </div>
 
-                  <span
-                    className={`mt-2 font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-[3px] border ${
-                      healthScore < 50
-                        ? "bg-rose-500/10 text-rose-400 border-rose-500/30"
-                        : healthScore < 75
-                        ? "bg-amber/10 text-amber border-amber/30"
-                        : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                    }`}
-                  >
-                    {healthScore < 50 ? "Critical Drift Deviation" : healthScore < 75 ? "Moderate Alignment" : "Optimal Alignment"}
-                  </span>
+                  <p className={`text-[12px] mt-2 font-medium ${
+                    healthScore < 50 ? "text-rose-400" : healthScore < 75 ? "text-amber" : "text-emerald-400"
+                  }`}>
+                    {healthScore < 50 ? "Critical" : healthScore < 75 ? "Moderate" : "Healthy"}
+                  </p>
                   
-                  <p className="text-[10px] font-mono text-[#555] mt-2">
-                    {lastUpdated ? (minsAgo === 0 ? "Synced just now" : `Synced ${minsAgo}m ago`) : "Live"}
+                  <p className="text-[11px] text-[#555] mt-1">
+                    {lastUpdated ? (minsAgo === 0 ? "Updated just now" : `${minsAgo}m ago`) : "Live"}
                   </p>
                 </div>
               </div>
