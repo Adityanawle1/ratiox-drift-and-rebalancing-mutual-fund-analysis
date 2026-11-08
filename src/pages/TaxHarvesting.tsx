@@ -9,6 +9,7 @@ import { Lock, Info, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { differenceInDays, parseISO } from "date-fns";
 import Disclaimer from "@/components/Disclaimer";
+import DashboardNav from "@/components/DashboardNav";
 
 type Tab = "LOSS_HARVESTING" | "LTCG_OPTIMISER";
 
@@ -118,41 +119,9 @@ const TaxHarvesting = () => {
   const ltcgEstimatedImpact = ltcgSuggestions.reduce((acc, s) => acc + s.estimatedImpact, 0);
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-20">
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-surface-border">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="font-display text-xl font-bold text-amber hover:brightness-110 transition-all">Ratio x</Link>
-          <div className="flex items-center gap-6">
-            <Link 
-              to="/dashboard/fee-audit" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber/80 hover:text-amber transition-colors border border-amber/20 bg-amber/5 px-2.5 py-1 rounded-[2px]"
-            >
-              Fee Audit
-            </Link>
-            <Link 
-              to="/dashboard" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber/80 hover:text-amber transition-colors border border-amber/20 bg-amber/5 px-2.5 py-1 rounded-[2px]"
-            >
-              Drift Engine
-            </Link>
-            <Link 
-              to="/dashboard/tax-harvesting" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-background hover:brightness-110 transition-colors border border-amber/20 bg-amber px-3 py-1.5 rounded-[2px] font-semibold shadow-glow-amber"
-            >
-              <Lock className="w-3 h-3" />
-              Tax Harvesting
-            </Link>
-            <span className="text-xs text-muted-foreground font-body hidden sm:block">{user?.email}</span>
-            <button
-              onClick={() => { signOut(); navigate("/"); }}
-              className="text-sm text-muted-foreground hover:text-foreground font-body transition-colors"
-            >
-              Sign out
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-[#060606] text-[#e0e0e0] pb-20">
+      {/* Universal Institutional Navigation */}
+      <DashboardNav activeTab="tax-harvesting" />
 
       {/* Main Content Area */}
       <div className="pt-24 max-w-4xl mx-auto px-6 relative">
