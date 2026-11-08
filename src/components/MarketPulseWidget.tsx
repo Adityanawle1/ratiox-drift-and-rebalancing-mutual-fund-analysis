@@ -1,4 +1,5 @@
 import { TrendingUp, TrendingDown, Activity, Globe, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MOCK_INDICES = [
   { name: "NIFTY 50", value: "24,123.45", change: "+0.85%", up: true },
@@ -64,11 +65,13 @@ export default function MarketPulseWidget() {
       {/* News Section */}
       <div className="flex-[1.5] relative z-10">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
+          <Link to="/news" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Globe className="w-4 h-4 text-amber" />
-            <h2 className="font-display text-lg font-semibold text-foreground tracking-wide">Market News</h2>
-          </div>
-          <span className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground px-2 py-1 bg-surface-border/30 rounded">Auto-updating</span>
+            <h2 className="font-display text-lg font-semibold text-foreground tracking-wide hover:text-amber transition-colors">Market News</h2>
+          </Link>
+          <Link to="/news" className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground hover:text-amber px-2 py-1 bg-surface-border/30 rounded flex items-center gap-1 transition-colors">
+            View All Wire <ExternalLink className="w-2.5 h-2.5" />
+          </Link>
         </div>
 
         <div className="flex flex-col gap-3">

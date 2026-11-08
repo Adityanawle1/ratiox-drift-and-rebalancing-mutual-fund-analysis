@@ -29,6 +29,7 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword.tsx"));
 const AboutUs = lazy(() => import("./pages/AboutUs.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter.tsx"));
+const MarketNews = lazy(() => import("./pages/MarketNews.tsx"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,6 +74,8 @@ const App = () => (
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/security" element={<Security />} />
                 <Route path="/help" element={<HelpCenter />} />
+                <Route path="/news" element={<MarketNews />} />
+                <Route path="/market-news" element={<MarketNews />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
