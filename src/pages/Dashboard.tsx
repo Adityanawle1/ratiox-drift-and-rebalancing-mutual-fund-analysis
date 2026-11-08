@@ -16,6 +16,7 @@ import SharePortfolioModal from "@/components/SharePortfolioModal";
 import DriftTable from "@/components/DriftTable";
 import HoldingsLedger from "@/components/HoldingsLedger";
 import RebalanceHistory from "@/components/RebalanceHistory";
+import DashboardNav from "@/components/DashboardNav";
 import { format } from "date-fns";
 import { Share2, Lock } from "lucide-react";
 import Disclaimer from "@/components/Disclaimer";
@@ -209,51 +210,14 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-premium border-b border-surface-border">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="font-display text-xl font-bold gradient-text-amber hover:brightness-125 transition-all text-premium">Ratio x</Link>
-          <div className="flex items-center gap-6">
-            <Link 
-              to="/learn-drift" 
-              className="hidden md:flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-amber transition-colors"
-            >
-              How It Works
-            </Link>
-            <Link 
-              to="/dashboard/fee-audit" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber/80 hover:text-amber transition-premium border border-amber/20 bg-amber/5 px-3 py-1.5 rounded-[4px] hover:bg-amber/10 hover:border-amber/40 hover:shadow-glow-amber"
-            >
-              Fee Audit
-            </Link>
-            <Link 
-              to="/dashboard" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-background hover:brightness-110 transition-premium border border-amber/20 bg-amber px-4 py-1.5 rounded-[4px] font-semibold shadow-glow-amber"
-            >
-              Drift Engine
-            </Link>
-
-            <Link 
-              to="/dashboard/tax-harvesting" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber/80 hover:text-amber transition-premium border border-amber/20 bg-amber/5 px-3 py-1.5 rounded-[4px] hover:bg-amber/10 hover:border-amber/40 hover:shadow-glow-amber"
-            >
-              <Lock className="w-3 h-3" />
-              Tax Harvesting
-            </Link>
-            <span className="text-xs text-muted-foreground font-body hidden sm:block text-premium">{user?.email}</span>
-            <button
-              onClick={() => { signOut(); navigate("/"); }}
-              className="text-sm text-muted-foreground hover:text-foreground font-body transition-colors text-premium"
-            >
-              Sign out
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-[#060606] text-[#e0e0e0]">
+      {/* Universal Institutional Navigation */}
+      <DashboardNav activeTab="drift" />
 
       {/* Main Content */}
-      <div className="pt-24 pb-16 max-w-6xl mx-auto px-6">
+      <div className="pt-24 pb-16 max-w-6xl mx-auto px-6 relative">
+        <div className="fixed top-24 right-10 w-[500px] h-[500px] bg-amber/5 rounded-full blur-[140px] pointer-events-none -z-10" />
+        <div className="fixed bottom-10 left-10 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none -z-10" />
         {loading ? (
           <div className="flex flex-col items-center justify-center h-64 gap-4">
             <div className="w-8 h-8 border-2 border-amber border-t-transparent rounded-full animate-spin" />
@@ -271,97 +235,159 @@ const Dashboard = () => {
           </div>
         ) : (
           <>
-            {/* Header row */}
-            <div className="flex flex-col md:flex-row items-start justify-between mb-12 p-8 rounded-[12px] bg-card/40 border border-surface-border/50 glass shadow-premium card-hover-glow relative overflow-hidden">
-              <div className="absolute -top-32 -left-32 w-64 h-64 bg-amber/5 rounded-full blur-3xl pointer-events-none" />
+            {/* Institutional Portfolio Cockpit Card */}
+            <div className="mb-10 p-6 md:p-8 rounded-[12px] bg-[#0c0c0c] border border-[#1f1f1f] shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-amber/5 rounded-full blur-[100px] pointer-events-none" />
               
-              <div className="relative z-10 w-full md:w-auto">
-                <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground heading-premium mb-2">
-                  {portfolio?.name || "My Portfolio"}
-                </h1>
-                <div className="flex flex-wrap items-center gap-x-8 gap-y-4 mt-6">
-                  <div className="group">
-                    <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-widest mb-1.5">Total Value</p>
-                    <p className="font-mono text-2xl md:text-3xl text-foreground text-premium group-hover:text-amber transition-colors duration-300">
-                      ₹{totalValue.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
-                    </p>
-                  </div>
-                  <div className="group">
-                    <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-widest mb-1.5">Total Invested</p>
-                    <p className="font-mono text-2xl md:text-3xl text-foreground text-premium transition-colors duration-300">
-                      ₹{totalInvested.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
-                    </p>
-                  </div>
-                  <div className="group">
-                    <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-widest mb-1.5">Overall P&L</p>
-                    <p className={`font-mono text-2xl md:text-3xl text-premium ${overallPnl >= 0 ? "text-drift-green" : "text-drift-red"}`}>
-                      {overallPnl >= 0 ? "+" : "-"}₹{Math.abs(overallPnl).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
-                      <span className="text-sm md:text-base ml-2 opacity-70 font-medium">
-                        ({overallPnlPct >= 0 ? "+" : ""}{overallPnlPct.toFixed(2)}%)
+              {/* Cockpit Top Bar */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1c1c1c] mb-6 relative z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h1 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-white">
+                        {portfolio?.name || "My Portfolio"}
+                      </h1>
+                      <span className="font-mono text-[9px] uppercase tracking-wider text-amber bg-amber/10 border border-amber/20 px-2 py-0.5 rounded">
+                        Active Ledger
                       </span>
+                    </div>
+                    <p className="text-[11px] font-mono text-[#666] mt-0.5">
+                      Account ID: {user?.id.slice(0, 8)}... • SEBI Regulatory Standard Format
                     </p>
                   </div>
+                </div>
+
+                {/* Top Action Buttons */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <button
+                    onClick={() => setAddModalOpen(true)}
+                    className="text-xs uppercase tracking-wider font-mono bg-amber text-black font-bold px-4 py-2 rounded-[4px] hover:brightness-110 transition-all shadow-[0_0_12px_rgba(245,158,11,0.3)] hover:-translate-y-0.5"
+                  >
+                    + Add Position
+                  </button>
+                  <button
+                    onClick={() => setImportCSVModalOpen(true)}
+                    className="text-xs uppercase tracking-wider font-mono border border-[#2a2a2a] bg-[#141414] text-white hover:bg-[#1e1e1e] px-4 py-2 rounded-[4px] transition-all hover:-translate-y-0.5"
+                  >
+                    Import CAS
+                  </button>
+                  <button
+                    onClick={() => setShareModalOpen(true)}
+                    className="text-xs uppercase tracking-wider font-mono border border-[#2a2a2a] bg-[#141414] text-[#aaa] hover:text-white hover:bg-[#1e1e1e] px-3 py-2 rounded-[4px] transition-all flex items-center gap-1.5"
+                    title="Export Tear Sheet"
+                  >
+                    <Share2 className="w-3.5 h-3.5 text-amber" />
+                    <span>Tear Sheet</span>
+                  </button>
                 </div>
               </div>
 
-              {/* Health Score */}
-              <div className="text-right mt-8 md:mt-0 relative z-10 flex flex-col items-end shrink-0">
-                <div className="font-mono text-5xl font-bold gradient-text-amber glow-text">
-                  {healthScore.toFixed(0)}
-                  <span className="text-lg text-amber/40 font-medium ml-1">/100</span>
-                </div>
-                <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-widest mt-2">Health Score</p>
-                <div className="relative mt-3">
-                  <svg width="120" height="68" viewBox="0 0 120 68" className="drop-shadow-lg">
-                    <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="hsl(0 0% 13%)" strokeWidth="6" strokeLinecap="round" />
-                    <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="hsl(37 90% 55%)" strokeWidth="6" strokeLinecap="round"
-                      strokeDasharray="157" strokeDashoffset={157 - 157 * (healthScore / 100)} 
-                      className="transition-all duration-1000 ease-out" />
-                  </svg>
-                  <div className="absolute inset-0 bg-amber/20 blur-xl rounded-full opacity-40 mix-blend-screen pointer-events-none" />
-                </div>
-                <div className="flex items-center justify-end gap-3 mt-3">
-                  {lastUpdated && (
-                    <p className="text-[10px] text-muted-foreground font-body">
-                      {minsAgo === 0 ? "Updated just now" : `Updated ${minsAgo}m ago`}
+              {/* Metrics & Health Score Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+                {/* 3 Metrics Cards */}
+                <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {/* Total Value */}
+                  <div className="bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] p-5 rounded-[8px] transition-all group">
+                    <p className="text-[10px] text-[#777] font-mono uppercase tracking-[0.2em] mb-2">
+                      Total Market Value
                     </p>
-                  )}
-                  <button 
-                    onClick={async () => {
-                      clearPriceCache();
-                      toast.loading("Refreshing prices...", { id: "refresh-toast" });
-                      await refreshDriftData();
-                      toast.success("Prices updated successfully", { id: "refresh-toast" });
-                    }}
-                    className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded hover:bg-white/5"
-                    title="Force refresh live prices"
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                      <path d="M3 3v5h5" />
-                    </svg>
-                  </button>
-                </div>
-                {failedPriceSymbols.length > 0 && (
-                  <p className="text-[10px] text-drift-red font-body mt-1">
-                    {failedPriceSymbols.length} price(s) unavailable
-                  </p>
-                )}
-
-                <div className="flex flex-col items-end mt-6">
-                  <button 
-                    onClick={() => setShareModalOpen(true)}
-                    className="group flex items-center gap-2 text-[10px] uppercase tracking-widest font-mono text-muted-foreground hover:text-foreground transition-all bg-surface-border/30 hover:bg-surface-border/60 border border-surface-border px-3 py-1.5 rounded"
-                  >
-                    <Share2 className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:text-amber transition-colors" />
-                    Export Tear Sheet
-                  </button>
-                  <div className="flex items-center gap-1.5 mt-2">
-                    <span className="w-1 inset-y-0 h-1 rounded-full bg-drift-green/60"></span>
-                    <p className="text-[9px] uppercase tracking-wider text-muted-foreground/70 font-mono">
-                      Data Anonymized
+                    <p className="font-mono text-2xl md:text-3xl text-white font-medium tracking-tight group-hover:text-amber transition-colors">
+                      ₹{totalValue.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                    </p>
+                    <p className="text-[10px] font-mono text-[#555] mt-2 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      Live NAV Real-Time Sync
                     </p>
                   </div>
+
+                  {/* Invested */}
+                  <div className="bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] p-5 rounded-[8px] transition-all">
+                    <p className="text-[10px] text-[#777] font-mono uppercase tracking-[0.2em] mb-2">
+                      Capital Deployed
+                    </p>
+                    <p className="font-mono text-2xl md:text-3xl text-white font-medium tracking-tight">
+                      ₹{totalInvested.toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                    </p>
+                    <p className="text-[10px] font-mono text-[#555] mt-2">
+                      Book Value Benchmark
+                    </p>
+                  </div>
+
+                  {/* P&L */}
+                  <div className="bg-[#0f0f0f] border border-[#1f1f1f] hover:border-[#333] p-5 rounded-[8px] transition-all">
+                    <p className="text-[10px] text-[#777] font-mono uppercase tracking-[0.2em] mb-2">
+                      Overall Return
+                    </p>
+                    <p className={`font-mono text-2xl md:text-3xl font-medium tracking-tight ${overallPnl >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {overallPnl >= 0 ? "+" : "-"}₹{Math.abs(overallPnl).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                    </p>
+                    <p className={`text-[11px] font-mono mt-1 font-semibold ${overallPnl >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {overallPnlPct >= 0 ? "+" : ""}{overallPnlPct.toFixed(2)}% Absolute
+                    </p>
+                  </div>
+                </div>
+
+                {/* Health Score Gauge Tile */}
+                <div className="lg:col-span-4 bg-gradient-to-br from-[#121212] to-[#0a0a0a] border border-[#222] p-5 rounded-[8px] flex flex-col items-center text-center relative overflow-hidden">
+                  <div className="w-full flex items-center justify-between mb-2">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#777]">
+                      Allocation Health
+                    </span>
+                    <button 
+                      onClick={async () => {
+                        clearPriceCache();
+                        toast.loading("Syncing prices...", { id: "refresh-toast" });
+                        await refreshDriftData();
+                        toast.success("Prices updated successfully", { id: "refresh-toast" });
+                      }}
+                      className="text-[#666] hover:text-amber transition-colors p-1"
+                      title="Force refresh live market rates"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                        <path d="M3 3v5h5" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div className="relative my-2 flex items-center justify-center">
+                    <svg width="140" height="76" viewBox="0 0 120 68" className="drop-shadow-md">
+                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="#1f1f1f" strokeWidth="7" strokeLinecap="round" />
+                      <path 
+                        d="M10 60 A50 50 0 0 1 110 60" 
+                        fill="none" 
+                        stroke={healthScore < 50 ? "#f43f5e" : healthScore < 75 ? "#f59e0b" : "#10b981"} 
+                        strokeWidth="7" 
+                        strokeLinecap="round"
+                        strokeDasharray="157" 
+                        strokeDashoffset={157 - 157 * (healthScore / 100)} 
+                        className="transition-all duration-1000 ease-out" 
+                      />
+                    </svg>
+                    <div className="absolute bottom-0 text-center">
+                      <span className="font-display text-3xl font-bold text-white tracking-tight">
+                        {healthScore.toFixed(0)}
+                      </span>
+                      <span className="font-mono text-xs text-[#666] ml-0.5">/100</span>
+                    </div>
+                  </div>
+
+                  <span
+                    className={`mt-2 font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-[3px] border ${
+                      healthScore < 50
+                        ? "bg-rose-500/10 text-rose-400 border-rose-500/30"
+                        : healthScore < 75
+                        ? "bg-amber/10 text-amber border-amber/30"
+                        : "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                    }`}
+                  >
+                    {healthScore < 50 ? "Critical Drift Deviation" : healthScore < 75 ? "Moderate Alignment" : "Optimal Alignment"}
+                  </span>
+                  
+                  <p className="text-[10px] font-mono text-[#555] mt-2">
+                    {lastUpdated ? (minsAgo === 0 ? "Synced just now" : `Synced ${minsAgo}m ago`) : "Live"}
+                  </p>
                 </div>
               </div>
             </div>
