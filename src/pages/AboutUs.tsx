@@ -194,7 +194,6 @@ const AboutUs: React.FC = () => {
               number="04"
               name="Aditya"
               description="If the mutual fund industry thrives on opacity, we exist to dismantle it. True wealth creation demands absolute, uncompromising clarity."
-              linkUrl="https://portfolio-eight-umber-fian7abm8o.vercel.app/"
               svgContent={{
                 icon: <svg width="24" height="24" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="6" className="text-[#666] group-hover:text-black transition-colors"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" /><circle cx="50" cy="50" r="10" /></svg>,
                 watermark: <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" /><circle cx="50" cy="50" r="10" /></svg>

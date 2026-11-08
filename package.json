@@ -1,7 +1,8 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "ratiox-portfolio-intelligence",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Autonomous Mutual Fund Fee Audit & Portfolio Rebalancing Engine",
   "type": "module",
   "scripts": {
     "dev": "vite",

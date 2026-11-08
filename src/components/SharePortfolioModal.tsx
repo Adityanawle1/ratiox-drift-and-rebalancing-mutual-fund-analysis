@@ -312,7 +312,7 @@ export default function SharePortfolioModal({ open, onOpenChange, data }: ShareP
                 </div>
                 <div style={{ textAlign: "right", borderLeft: "1px solid rgba(255, 255, 255, 0.1)", paddingLeft: "40px" }}>
                   <p style={{ fontSize: "12px", color: "rgba(244, 241, 237, 0.4)", marginBottom: "8px", fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase", letterSpacing: "0.05em" }}>Generated via</p>
-                  <p style={{ fontSize: "24px", fontWeight: "300", letterSpacing: "-0.01em", color: "#f5a623", margin: 0 }}>ratio-x.com</p>
+                  <p style={{ fontSize: "24px", fontWeight: "300", letterSpacing: "-0.01em", color: "#f5a623", margin: 0 }}>ratiox.in</p>
                 </div>
               </div>
             </div>
