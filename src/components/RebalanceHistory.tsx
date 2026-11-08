@@ -9,12 +9,15 @@ const RebalanceHistory: React.FC<RebalanceHistoryProps> = ({ rebalanceLogs }) =>
   if (rebalanceLogs.length === 0) return null;
 
   return (
-    <div className="mt-12 border border-surface-border/50 rounded-[12px] overflow-hidden glass shadow-premium bg-card/40 card-hover-glow relative">
-      <div className="px-6 py-5 border-b border-surface-border/50 bg-background/40 backdrop-blur-sm">
-        <span className="text-sm uppercase tracking-widest font-mono font-bold text-foreground opacity-90 text-premium">Rebalance Ledger</span>
+    <div className="mt-10 border border-[#1f1f1f] rounded-[10px] overflow-hidden bg-[#0a0a0a] shadow-2xl relative">
+      <div className="px-6 py-4 border-b border-[#1f1f1f] bg-[#0d0d0d] flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+          <span className="text-xs uppercase tracking-[0.2em] font-mono font-bold text-white">Rebalance Audit Trail</span>
+        </div>
       </div>
       {rebalanceLogs.map((log) => (
-        <div key={log.id} className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-5 border-b border-surface-border/50 last:border-b-0 hover:bg-surface-hover/20 transition-colors group gap-4">
+        <div key={log.id} className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-[#141414] last:border-b-0 hover:bg-white/[0.02] transition-colors group gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-2">
               <p className="text-base font-mono font-semibold text-foreground text-premium">

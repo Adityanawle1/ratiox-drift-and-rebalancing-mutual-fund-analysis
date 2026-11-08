@@ -27,26 +27,29 @@ const HoldingsLedger: React.FC<HoldingsLedgerProps> = ({
   if (holdingsWithValues.length === 0) return null;
 
   return (
-    <div className="border border-surface-border/50 rounded-[12px] overflow-hidden glass shadow-premium bg-card/40 card-hover-glow">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-surface-border/50 bg-background/40 backdrop-blur-sm">
-        <span className="text-sm uppercase tracking-widest font-mono font-bold text-foreground opacity-90 text-premium">Positions Ledger</span>
-        <div className="flex items-center gap-3">
+    <div className="border border-[#1f1f1f] rounded-[10px] overflow-hidden bg-[#0a0a0a] shadow-2xl mb-10">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-[#1f1f1f] bg-[#0d0d0d]">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-amber animate-pulse" />
+          <span className="text-xs uppercase tracking-[0.2em] font-mono font-bold text-white">Positions Ledger</span>
+        </div>
+        <div className="flex items-center gap-2.5">
           <button
             onClick={() => setImportCSVModalOpen(true)}
-            className="text-[12px] uppercase tracking-wider border border-surface-border/50 text-muted-foreground bg-surface/50 font-mono px-5 py-2.5 rounded-[4px] hover:text-foreground hover:bg-surface hover:border-surface-border/80 transition-all hover-lift glass font-semibold"
+            className="text-xs uppercase tracking-wider border border-[#2a2a2a] bg-[#141414] text-[#aaa] hover:text-white hover:bg-[#1f1f1f] font-mono px-3.5 py-1.5 rounded-[4px] transition-all"
           >
-            Bulk Import
+            Bulk CAS
           </button>
           <button
             onClick={() => setAddModalOpen(true)}
-            className="text-[12px] uppercase tracking-wider border border-surface-border/50 text-muted-foreground bg-surface/50 font-mono px-5 py-2.5 rounded-[4px] hover:text-foreground hover:bg-surface hover:border-surface-border/80 transition-all hover-lift glass font-semibold"
+            className="text-xs uppercase tracking-wider bg-amber text-black font-mono font-bold px-4 py-1.5 rounded-[4px] hover:brightness-110 transition-all shadow-[0_0_12px_rgba(245,158,11,0.3)]"
           >
-            Add Position
+            + Add Position
           </button>
         </div>
       </div>
       {holdingsWithValues.map((h: HoldingWithValue) => (
-        <div key={h.id} className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-5 border-b border-surface-border/50 last:border-b-0 hover:bg-surface-hover/20 transition-colors gap-4">
+        <div key={h.id} className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-[#141414] last:border-b-0 hover:bg-white/[0.02] transition-colors gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-1">
               <span className="text-base font-mono font-semibold text-foreground text-premium">{h.symbol}</span>
