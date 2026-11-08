@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DriftResult } from "@/lib/drift-engine";
-import { ArrowUpRight, ArrowDownRight, CheckCircle2, AlertTriangle, Layers, Plus, FileSpreadsheet } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, Plus, FileSpreadsheet, Layers } from "lucide-react";
 
 interface DriftTableProps {
   driftResults: DriftResult[];
@@ -28,27 +28,27 @@ const DriftTable: React.FC<DriftTableProps> = ({
 }) => {
   if (driftResults.length === 0) {
     return (
-      <div className="border border-[#1f1f1f] rounded-[10px] bg-[#0c0c0c] p-12 text-center mb-10 relative overflow-hidden shadow-2xl">
+      <div className="border border-[#1a1a1a] rounded-xl bg-[#0c0c0c] p-12 text-center mb-10">
         <div className="max-w-md mx-auto">
-          <div className="w-12 h-12 rounded-full bg-amber/10 border border-amber/30 text-amber flex items-center justify-center mx-auto mb-4">
+          <div className="w-12 h-12 rounded-full bg-amber/10 text-amber flex items-center justify-center mx-auto mb-4">
             <Layers className="w-6 h-6" />
           </div>
-          <h3 className="font-display text-xl text-white font-semibold mb-2">Portfolio Unallocated</h3>
-          <p className="text-xs text-[#888] font-body leading-relaxed mb-6">
-            No holdings or target allocations detected. Ingest your portfolio via broker CSV or enter positions manually to initialize drift tracking.
+          <h3 className="text-xl text-white font-semibold mb-2">No allocations yet</h3>
+          <p className="text-sm text-[#888] leading-relaxed mb-6">
+            Add your holdings or import a broker CSV to start tracking portfolio drift.
           </p>
           <div className="flex justify-center items-center gap-3">
             <button
               onClick={() => setAddModalOpen(true)}
-              className="text-xs uppercase tracking-wider font-mono bg-amber text-black font-bold px-5 py-2.5 rounded-[4px] hover:brightness-110 transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(245,158,11,0.3)]"
+              className="text-[13px] font-medium bg-amber text-black px-5 py-2.5 rounded-md hover:brightness-110 transition-all flex items-center gap-1.5"
             >
-              <Plus className="w-3.5 h-3.5" /> Manual Entry
+              <Plus className="w-3.5 h-3.5" /> Add position
             </button>
             <button
               onClick={() => setImportCSVModalOpen(true)}
-              className="text-xs uppercase tracking-wider font-mono border border-[#2a2a2a] bg-[#141414] text-white px-5 py-2.5 rounded-[4px] hover:bg-[#1f1f1f] transition-all flex items-center gap-1.5"
+              className="text-[13px] font-medium border border-[#2a2a2a] bg-[#141414] text-white px-5 py-2.5 rounded-md hover:bg-[#1f1f1f] transition-all flex items-center gap-1.5"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5 text-[#888]" /> Import CAS / CSV
+              <FileSpreadsheet className="w-3.5 h-3.5 text-[#888]" /> Import CSV
             </button>
           </div>
         </div>
@@ -56,45 +56,35 @@ const DriftTable: React.FC<DriftTableProps> = ({
     );
   }
 
-  // Calculate allocation breakdown bar
   const totalActual = driftResults.reduce((acc, r) => acc + r.currentPct, 0) || 100;
 
   return (
-    <div className="border border-[#1f1f1f] rounded-[10px] bg-[#0a0a0a] mb-10 relative overflow-hidden shadow-2xl">
-      {/* Header Bar */}
-      <div className="px-6 py-4 border-b border-[#1f1f1f] bg-[#0d0d0d] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="border border-[#1a1a1a] rounded-xl bg-[#0a0a0a] mb-10 overflow-hidden">
+      {/* Header */}
+      <div className="px-6 py-4 border-b border-[#1a1a1a] bg-[#0d0d0d] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-amber animate-pulse" />
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-white font-semibold">
-              Drift Analysis Engine
-            </h3>
-          </div>
+          <h3 className="text-sm font-semibold text-white">
+            Drift Analysis
+          </h3>
           <Link
             to="/learn-drift"
-            className="text-[10px] uppercase tracking-wider font-mono text-[#888] hover:text-amber border border-[#222] bg-[#141414] hover:bg-[#1a1a1a] px-2.5 py-1 rounded transition-colors"
+            className="text-[11px] text-[#777] hover:text-amber transition-colors"
           >
-            Formula Specs ↗
+            How it works →
           </Link>
         </div>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setRebalanceModalOpen(true)}
-            className="text-xs uppercase tracking-wider font-mono bg-amber text-black font-bold px-4 py-2 rounded-[4px] hover:brightness-110 transition-all shadow-[0_0_12px_rgba(245,158,11,0.3)] flex items-center gap-1.5"
-          >
-            Compute Rebalance Orders
-          </button>
-        </div>
+        <button
+          onClick={() => setRebalanceModalOpen(true)}
+          className="text-[13px] font-medium bg-amber text-black px-4 py-2 rounded-md hover:brightness-110 transition-all flex items-center gap-1.5"
+        >
+          Rebalance
+        </button>
       </div>
 
-      {/* Proportional Asset Allocation Bar */}
-      <div className="px-6 pt-5 pb-3 border-b border-[#181818] bg-[#0b0b0b]">
-        <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[#777] mb-2 tracking-wider">
-          <span>Actual Portfolio Distribution</span>
-          <span>Normalized Exposure: 100%</span>
-        </div>
-        <div className="w-full h-3 bg-[#161616] rounded-full overflow-hidden flex gap-0.5 p-0.5">
+      {/* Allocation Bar */}
+      <div className="px-6 pt-4 pb-3 border-b border-[#151515]">
+        <div className="w-full h-2.5 bg-[#161616] rounded-full overflow-hidden flex gap-0.5 p-0.5">
           {driftResults.map((r) => {
             const width = Math.max(0, (r.currentPct / totalActual) * 100);
             if (width <= 0) return null;
@@ -113,14 +103,14 @@ const DriftTable: React.FC<DriftTableProps> = ({
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <div className="min-w-[700px]">
-          <div className="grid grid-cols-[1.8fr_100px_100px_120px_1.2fr_130px] text-[10px] uppercase tracking-wider text-[#777] font-mono px-6 py-3 bg-[#0d0d0d] border-b border-[#191919]">
-            <span>Asset Class</span>
+        <div className="min-w-[650px]">
+          <div className="grid grid-cols-[1.8fr_90px_90px_100px_1.2fr_110px] text-[11px] text-[#777] font-medium px-6 py-3 bg-[#0d0d0d] border-b border-[#171717]">
+            <span>Asset class</span>
             <span className="text-right">Target</span>
             <span className="text-right">Actual</span>
             <span className="text-right">Variance</span>
-            <span className="pl-6">Deviation Meter</span>
-            <span className="text-center">Protocol State</span>
+            <span className="pl-6">Deviation</span>
+            <span className="text-center">Status</span>
           </div>
 
           {driftResults.map((row) => {
@@ -132,43 +122,36 @@ const DriftTable: React.FC<DriftTableProps> = ({
             return (
               <div
                 key={row.assetClass}
-                className="grid grid-cols-[1.8fr_100px_100px_120px_1.2fr_130px] text-xs font-mono px-6 py-4 border-b border-[#141414] last:border-b-0 hover:bg-white/[0.02] transition-colors items-center"
+                className="grid grid-cols-[1.8fr_90px_90px_100px_1.2fr_110px] text-sm px-6 py-4 border-b border-[#131313] last:border-b-0 hover:bg-white/[0.02] transition-colors items-center"
               >
-                {/* Asset Class Name + Dot */}
+                {/* Asset Class */}
                 <div className="flex items-center gap-2.5">
                   <span
                     className="w-2.5 h-2.5 rounded-sm shrink-0"
                     style={{ backgroundColor: color }}
                   />
-                  <div>
-                    <p className="text-sm font-sans font-medium text-white">
-                      {row.assetClass}
-                    </p>
-                    <p className="text-[10px] text-[#666] font-mono">
-                      Threshold ±{row.driftThreshold}%
-                    </p>
-                  </div>
+                  <span className="font-medium text-white">{row.assetClass}</span>
                 </div>
 
                 {/* Target */}
-                <span className="text-right text-xs font-mono text-[#888]">
+                <span className="text-right text-[13px] font-mono text-[#888] tabular">
                   {row.targetPct.toFixed(1)}%
                 </span>
 
                 {/* Actual */}
-                <span className="text-right text-sm font-mono text-white font-medium">
+                <span className="text-right text-[13px] font-mono text-white font-medium tabular">
                   {row.currentPct.toFixed(1)}%
                 </span>
 
-                {/* Variance Chip */}
+                {/* Variance */}
                 <div className="flex justify-end">
                   <span
-                    className={`inline-flex items-center gap-1 text-xs font-mono font-medium px-2 py-0.5 rounded ${
+                    className={`inline-flex items-center gap-1 text-[12px] font-mono font-medium px-2 py-0.5 rounded tabular ${
                       isCritical
-                        ? "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                        ? "bg-rose-500/10 text-rose-400"
                         : isDrifting
-                        ? "bg-amber/10 text-amber border border-amber/20"
-                        : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                        ? "bg-amber/10 text-amber"
+                        : "bg-emerald-500/10 text-emerald-400"
                     }`}
                   >
                     {isOver ? (
@@ -181,16 +164,16 @@ const DriftTable: React.FC<DriftTableProps> = ({
                   </span>
                 </div>
 
-                {/* Visual Comparative Deviation Meter */}
+                {/* Deviation Bar */}
                 <div className="pl-6">
-                  <div className="relative w-full h-2 bg-[#1c1c1c] rounded-full overflow-hidden">
+                  <div className="relative w-full h-1.5 bg-[#1c1c1c] rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all duration-700 ${
                         isCritical
-                          ? "bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]"
+                          ? "bg-rose-500"
                           : isDrifting
-                          ? "bg-amber shadow-[0_0_8px_rgba(245,158,11,0.6)]"
-                          : "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"
+                          ? "bg-amber"
+                          : "bg-emerald-500"
                       }`}
                       style={{
                         width: `${Math.min(
@@ -200,30 +183,20 @@ const DriftTable: React.FC<DriftTableProps> = ({
                       }}
                     />
                   </div>
-                  <div className="flex justify-between text-[9px] text-[#555] font-mono mt-1">
-                    <span>0%</span>
-                    <span>Target Pin</span>
-                    <span>Alert Pin</span>
-                  </div>
                 </div>
 
-                {/* Status State Badge */}
+                {/* Status */}
                 <div className="flex justify-center">
                   <span
-                    className={`inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-[3px] border ${
+                    className={`text-[11px] font-medium px-2 py-0.5 rounded ${
                       isCritical
-                        ? "bg-rose-500/15 text-rose-400 border-rose-500/30 font-semibold"
+                        ? "text-rose-400"
                         : isDrifting
-                        ? "bg-amber/15 text-amber border-amber/30 font-medium"
-                        : "bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-medium"
+                        ? "text-amber"
+                        : "text-emerald-400"
                     }`}
                   >
-                    {isCritical ? (
-                      <AlertTriangle className="w-3 h-3 text-rose-400 animate-pulse" />
-                    ) : (
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                    )}
-                    {isCritical ? "Critical Drift" : isDrifting ? "Drifting" : "Balanced"}
+                    {isCritical ? "Critical" : isDrifting ? "Drifting" : "Balanced"}
                   </span>
                 </div>
               </div>
