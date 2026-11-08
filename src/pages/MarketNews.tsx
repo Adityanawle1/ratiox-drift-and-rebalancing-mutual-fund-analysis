@@ -97,39 +97,33 @@ const MarketNews: React.FC = () => {
 
       <main className="pt-24 md:pt-32 pb-20 px-5 md:px-12 max-w-6xl mx-auto">
         {/* Header */}
-        <header className="mb-12 border-b border-[#222] pb-10">
-          <div className="flex items-center gap-3 mb-4">
-            <Globe className="w-5 h-5 text-amber" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#888]">
-              Macro Intelligence & Regulatory Wire
-            </span>
-          </div>
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl tracking-tighter text-white lowercase">
-            market <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber/80 to-[#888]">pulse.</span>
+        <header className="mb-12 border-b border-[#1e1e1e] pb-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white mb-3">
+            Market Pulse
           </h1>
-          <p className="mt-4 font-light text-base md:text-lg text-[#999] max-w-2xl leading-relaxed">
-            Real-time regulatory circulars, mutual fund fee updates, and macroeconomic indicators tracked to protect your capital from silent policy drift.
+          <p className="text-sm md:text-base text-[#999] max-w-2xl leading-relaxed">
+            Regulatory circulars, mutual fund fee updates, and macroeconomic indicators relevant to your portfolio.
           </p>
         </header>
 
         {/* Filters and Search Bar */}
-        <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center mb-10 pb-6 border-b border-[#1c1c1c]">
+        <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center mb-10 pb-6 border-b border-[#1a1a1a]">
           {/* Categories */}
           <div className="flex flex-wrap gap-2">
             {[
-              { id: "all", label: "All Intelligence" },
-              { id: "regulation", label: "SEBI & Regulations" },
+              { id: "all", label: "All" },
+              { id: "regulation", label: "Regulations" },
               { id: "funds", label: "Mutual Funds" },
-              { id: "macro", label: "RBI & Macro" },
-              { id: "equity", label: "Equity & Capital Flow" },
+              { id: "macro", label: "Macro" },
+              { id: "equity", label: "Equity" },
             ].map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`font-mono text-xs uppercase tracking-wider px-3.5 py-1.5 rounded-[3px] transition-all ${
+                className={`text-[13px] font-medium px-3.5 py-1.5 rounded-md transition-all ${
                   selectedCategory === cat.id
-                    ? "bg-amber text-black font-semibold shadow-glow-amber"
-                    : "bg-[#111] text-[#777] border border-[#222] hover:text-white hover:border-[#333]"
+                    ? "bg-amber text-black font-semibold"
+                    : "bg-[#111] text-[#777] border border-[#1e1e1e] hover:text-white hover:border-[#333]"
                 }`}
               >
                 {cat.label}
@@ -145,7 +139,7 @@ const MarketNews: React.FC = () => {
               placeholder="Search news or circulars..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#0d0d0d] border border-[#222] rounded-[4px] pl-9 pr-4 py-2 text-xs font-mono text-white placeholder-[#555] focus:outline-none focus:border-amber transition-colors"
+              className="w-full bg-[#0d0d0d] border border-[#1e1e1e] rounded-md pl-9 pr-4 py-2 text-[13px] text-white placeholder-[#555] focus:outline-none focus:border-amber transition-colors"
             />
           </div>
         </div>
@@ -155,42 +149,42 @@ const MarketNews: React.FC = () => {
           {filteredNews.map((item) => (
             <article
               key={item.id}
-              className="bg-[#0b0b0b] border border-[#1e1e1e] hover:border-[#333] transition-all p-6 rounded-[4px] flex flex-col justify-between group hover:-translate-y-0.5"
+              className="bg-[#0b0b0b] border border-[#1e1e1e] hover:border-[#2a2a2a] transition-all p-6 rounded-lg flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between gap-4 mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-amber font-semibold">
+                    <span className="text-[12px] text-amber font-medium">
                       {item.source}
                     </span>
                     <span className="text-[#444] text-[10px]">•</span>
-                    <span className="font-mono text-[10px] text-[#666]">{item.time}</span>
+                    <span className="text-[12px] text-[#666]">{item.time}</span>
                   </div>
 
                   <span
-                    className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-[2px] border ${
+                    className={`text-[10px] font-medium px-2 py-0.5 rounded ${
                       item.impact === "positive"
-                        ? "bg-green-500/10 text-green-400 border-green-500/20"
+                        ? "bg-emerald-500/10 text-emerald-400"
                         : item.impact === "negative"
-                        ? "bg-red-500/10 text-red-400 border-red-500/20"
-                        : "bg-[#1a1a1a] text-[#888] border-[#2a2a2a]"
+                        ? "bg-rose-500/10 text-rose-400"
+                        : "bg-[#1a1a1a] text-[#888]"
                     }`}
                   >
-                    {item.impact} impact
+                    {item.impact}
                   </span>
                 </div>
 
-                <h2 className="font-display text-xl text-white group-hover:text-amber transition-colors leading-snug mb-3">
+                <h2 className="text-[16px] font-medium text-white group-hover:text-amber transition-colors leading-snug mb-3">
                   {item.title}
                 </h2>
 
-                <p className="font-body text-xs text-[#888] leading-relaxed mb-4">
+                <p className="text-[13px] text-[#888] leading-relaxed mb-4">
                   {item.summary}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#181818] flex items-center justify-between text-[11px] font-mono text-[#666]">
-                <span className="text-[#777] italic line-clamp-1">Insight: {item.impactDetail}</span>
+              <div className="pt-4 border-t border-[#151515] flex items-center justify-between text-[12px] text-[#666]">
+                <span className="text-[#777] italic line-clamp-1">{item.impactDetail}</span>
                 <ExternalLink className="w-3.5 h-3.5 text-[#555] group-hover:text-amber transition-colors shrink-0 ml-2" />
               </div>
             </article>
@@ -198,8 +192,8 @@ const MarketNews: React.FC = () => {
         </div>
 
         {filteredNews.length === 0 && (
-          <div className="text-center py-20 border border-[#222] rounded-[4px]">
-            <p className="font-mono text-xs uppercase tracking-widest text-[#666]">No circulars or articles matching your filter</p>
+          <div className="text-center py-20 border border-[#1e1e1e] rounded-lg">
+            <p className="text-sm text-[#666]">No articles matching your filter</p>
           </div>
         )}
       </main>
