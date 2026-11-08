@@ -70,15 +70,24 @@ const DashboardPreview = () => {
                 </div>
 
                 <div className="border-t border-surface-border pt-6 space-y-4">
-                  <div className={`flex justify-between items-center transition-all duration-700 delay-[600ms] ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}>
+                  <div 
+                    className={`flex justify-between items-center transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}
+                    style={{ transitionDelay: '600ms' }}
+                  >
                     <span className="text-xs text-muted-foreground font-body">Avg. TER (Regular)</span>
                     <span className="font-mono text-xs text-drift-red">1.68%</span>
                   </div>
-                  <div className={`flex justify-between items-center transition-all duration-700 delay-[800ms] ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}>
+                  <div 
+                    className={`flex justify-between items-center transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}
+                    style={{ transitionDelay: '800ms' }}
+                  >
                     <span className="text-xs text-muted-foreground font-body">Avg. TER (Direct)</span>
                     <span className="font-mono text-xs text-drift-green">0.78%</span>
                   </div>
-                  <div className={`flex justify-between items-center transition-all duration-700 delay-[1000ms] ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}>
+                  <div 
+                    className={`flex justify-between items-center transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}`}
+                    style={{ transitionDelay: '1000ms' }}
+                  >
                     <span className="text-xs text-muted-foreground font-body">Status</span>
                     <span className="font-mono text-xs text-background bg-drift-red px-2 py-0.5 rounded-sm flex items-center gap-1">
                       <div className="w-1.5 h-1.5 bg-background rounded-full animate-pulse"></div>Overpaying
@@ -86,7 +95,10 @@ const DashboardPreview = () => {
                   </div>
                 </div>
 
-                <div className={`pt-2 transition-all duration-700 delay-[1200ms] ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+                <div 
+                  className={`pt-2 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+                  style={{ transitionDelay: '1200ms' }}
+                >
                   <Link 
                     to={user ? "/dashboard/fee-audit" : "/signup"}
                     className="w-full relative block group/btn overflow-hidden bg-surface border border-surface-border text-foreground font-body text-xs py-4 text-center transition-all duration-300 hover:border-amber/50 font-medium cursor-pointer"

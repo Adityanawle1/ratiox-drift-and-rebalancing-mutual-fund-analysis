@@ -412,7 +412,10 @@ const Globe = () => {
   }, []);
 
   return (
-    <div className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+    <div 
+      className={`absolute inset-0 transition-all ease-out ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+      style={{ transitionDuration: '2000ms' }}
+    >
       <canvas
         ref={canvasRef}
         className="w-full h-full mix-blend-screen"
