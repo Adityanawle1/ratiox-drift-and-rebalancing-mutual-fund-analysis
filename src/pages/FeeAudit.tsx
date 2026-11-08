@@ -14,6 +14,7 @@ import CostProjectorTab from "@/components/fee-audit/CostProjectorTab";
 import ExitLoadMonitor from "@/components/fee-audit/ExitLoadMonitor";
 import HiddenChargesTab from "@/components/fee-audit/HiddenChargesTab";
 import AddHoldingModal from "@/components/AddHoldingModal";
+import DashboardNav from "@/components/DashboardNav";
 
 type Tab = "OVERVIEW" | "REGULAR_VS_DIRECT" | "COST_PROJECTOR" | "EXIT_LOAD" | "HIDDEN_CHARGES";
 
@@ -113,66 +114,54 @@ const FeeAudit = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-20">
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-premium border-b border-surface-border">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="font-display text-xl font-bold gradient-text-amber hover:brightness-125 transition-all text-premium">Ratio x</Link>
-          <div className="flex items-center gap-6">
-            <Link 
-              to="/dashboard/fee-audit" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-background hover:brightness-110 transition-premium border border-amber/20 bg-amber px-4 py-1.5 rounded-[4px] font-semibold shadow-glow-amber"
-            >
-              Fee Audit
-            </Link>
-            <Link 
-              to="/dashboard" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber/80 hover:text-amber transition-premium border border-amber/20 bg-amber/5 px-3 py-1.5 rounded-[4px] hover:bg-amber/10 hover:border-amber/40 hover:shadow-glow-amber"
-            >
-              Drift Engine
-            </Link>
-            <Link 
-              to="/dashboard/tax-harvesting" 
-              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber/80 hover:text-amber transition-premium border border-amber/20 bg-amber/5 px-3 py-1.5 rounded-[4px] hover:bg-amber/10 hover:border-amber/40 hover:shadow-glow-amber"
-            >
-              <Lock className="w-3 h-3" />
-              Tax Harvesting
-            </Link>
-            <span className="text-xs text-muted-foreground font-body hidden sm:block text-premium">{user?.email}</span>
-            <button onClick={() => { signOut(); navigate("/"); }} className="text-sm text-muted-foreground hover:text-foreground font-body transition-colors text-premium">Sign out</button>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-[#060606] text-[#e0e0e0] pb-20">
+      {/* Universal Institutional Navigation */}
+      <DashboardNav activeTab="fee-audit" />
 
-      <div className="pt-32 max-w-4xl mx-auto px-6 relative">
+      <div className="pt-28 max-w-6xl mx-auto px-6 relative">
         <div className="absolute top-20 right-0 w-96 h-96 bg-amber/5 rounded-full blur-[100px] pointer-events-none" />
         
-        <div className="mb-12 flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
+        {/* Top Header & Actions */}
+        <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative z-10 border-b border-[#1f1f1f] pb-8">
           <div>
-            <h1 className="font-display text-4xl md:text-5xl font-semibold mb-3 flex items-center gap-3 heading-premium">
+            <div className="flex items-center gap-2.5 mb-2.5">
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber bg-amber/10 border border-amber/20 px-2 py-0.5 rounded">
+                TER Arbitrage Engine
+              </span>
+              <span className="text-[#555] text-xs">•</span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-[#777]">
+                AMFI & SEBI Compliant
+              </span>
+            </div>
+            <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-2">
               Fee Audit
             </h1>
-            <p className="text-muted-foreground font-body text-base max-w-2xl text-premium subheading-premium">
-              See every rupee you are paying — visible and hidden. Across your entire portfolio.
+            <p className="text-[#888] font-body text-sm max-w-2xl leading-relaxed">
+              Deconstruct every basis point eroding your wealth. Compares direct vs regular expense ratios, distributor commissions, and 10-year compounding drag.
             </p>
           </div>
-          <div>
+          
+          <div className="flex items-center gap-3 shrink-0">
             <button 
               onClick={() => setAddModalOpen(true)}
-              className="text-[11px] uppercase tracking-wider border border-amber/30 bg-amber/90 text-background font-mono px-5 py-3 rounded-[4px] font-bold hover:brightness-110 hover:bg-amber hover-lift transition-all shadow-glow-amber shrink-0"
+              className="text-xs uppercase tracking-wider bg-amber text-black font-mono font-bold px-5 py-2.5 rounded-[4px] hover:brightness-110 transition-all shadow-[0_0_16px_rgba(245,158,11,0.3)] hover:-translate-y-0.5"
             >
-              Add Mutual Fund
+              + Add Mutual Fund
             </button>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex items-center gap-1 border-b border-surface-border mb-8 overflow-x-auto">
+        {/* Enhanced Tab Bar */}
+        <div className="flex items-center gap-2 border-b border-[#1e1e1e] mb-8 overflow-x-auto pb-px">
           {TABS.map(tab => (
             <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-              className={`px-3 py-3 font-mono text-[10px] uppercase tracking-wider transition-colors relative whitespace-nowrap ${activeTab === tab.key ? "text-amber" : "text-muted-foreground hover:text-foreground"}`}>
+              className={`px-4 py-3 font-mono text-xs uppercase tracking-wider transition-all relative whitespace-nowrap rounded-t-[4px] ${
+                activeTab === tab.key 
+                  ? "bg-[#141414] text-amber border-t border-x border-[#2a2a2a] font-semibold" 
+                  : "text-[#777] hover:text-white hover:bg-white/[0.02]"
+              }`}>
               {tab.label}
-              {activeTab === tab.key && <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber" />}
+              {activeTab === tab.key && <div className="absolute -bottom-[1px] left-0 right-0 h-[2px] bg-amber shadow-[0_0_8px_rgba(245,158,11,0.8)]" />}
             </button>
           ))}
         </div>
