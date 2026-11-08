@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { Sliders, Receipt, Percent, Globe, LogOut, HelpCircle } from "lucide-react";
+import { Sliders, Receipt, Globe, LogOut, HelpCircle } from "lucide-react";
 
 interface DashboardNavProps {
   activeTab?: "drift" | "fee-audit" | "tax-harvesting" | "news";
@@ -28,14 +28,6 @@ const DashboardNav: React.FC<DashboardNavProps> = ({ activeTab }) => {
       href: "/dashboard/fee-audit",
       icon: <Receipt className="w-3.5 h-3.5" />,
       active: activeTab === "fee-audit" || currentPath === "/dashboard/fee-audit",
-    },
-    {
-      id: "tax-harvesting",
-      label: "Tax Harvesting",
-      href: "/dashboard/tax-harvesting",
-      icon: <Percent className="w-3.5 h-3.5" />,
-      isPro: true,
-      active: activeTab === "tax-harvesting" || currentPath === "/dashboard/tax-harvesting",
     },
     {
       id: "news",
